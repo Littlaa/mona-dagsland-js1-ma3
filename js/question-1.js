@@ -5,6 +5,6 @@
 
 const getRemainder = (a, b) => a % b;
 
-const result = getRemainder(2, 5);
+// const result = getRemainder(2, 5);
 
-console.log(result);
+// console.log(result);
