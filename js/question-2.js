@@ -4,19 +4,30 @@ const url =
 const resultsContainer = document.querySelector(".results");
 
 async function getGames() {
-  const response = await fetch(url);
-  const results = await response.json();
-  const items = results.results;
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
+    const items = results.results;
 
-  for (let i = 0; i < items.length; i++) {
-    if (i === 8) {
-      break;
-    }
-    resultsContainer.innerHTML += `<div class="result"><p>Name:${items[i].name}</p> 
-                                    <p>Rating: ${items[i].rating}</P>
-                                    <P>Tags: ${items[i].tags.length}</p>
-                                    </div>`;
+    setTimeout(function () {
+      resultsContainer.innerHTML = "";
+
+      for (let i = 0; i < items.length; i++) {
+        if (i === 8) {
+          break;
+        }
+        resultsContainer.innerHTML += `<div class="result"><p>Name:${items[i].name}</p> 
+                                              <p>Rating: ${items[i].rating}</P>
+                                              <P>Tags: ${items[i].tags.length}</p>
+                                              </div>`;
+      }
+    }, 1000);
+  } catch (error) {
+    console.log(error);
+    resultsContainer.innerHTML = DisplayError("Oh no! Something went wrong when calling the API...");
   }
 }
 
 getGames();
+
+//Used the lessons for inspiration for the loading indicator.
